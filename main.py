@@ -1,16 +1,21 @@
-# This is a sample Python script.
+from PySide2.QtCore import QDir
+from PySide2.QtWidgets import QApplication, QSplitter, QMainWindow
 
-# Press Shift+F10 to execute it or replace it with your code.
-# Press Double Shift to search everywhere for classes, files, tool windows, actions, and settings.
+from PicsShow import PictureGalaxy
+from PlayList import PlayList
 
+if __name__ == "__main__":
+    app = QApplication()
+    win = QMainWindow()
+    win.setMinimumSize(600, 400)
 
-def print_hi(name):
-    # Use a breakpoint in the code line below to debug your script.
-    print(f'Hi, {name}')  # Press Ctrl+F8 to toggle the breakpoint.
+    split = QSplitter()
+    win.setCentralWidget(split)
 
+    show = PictureGalaxy()
+    w = PlayList(show)
+    split.addWidget(w)
+    split.addWidget(show)
 
-# Press the green button in the gutter to run the script.
-if __name__ == '__main__':
-    print_hi('PyCharm')
-
-# See PyCharm help at https://www.jetbrains.com/help/pycharm/
+    win.show()
+    app.exec_()
