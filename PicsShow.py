@@ -8,6 +8,7 @@ from PySide2.QtWidgets import QApplication, QWidget
 
 class PictureGalaxy(QWidget):
     pics_consume_out = Signal(str)
+    current_picture_changed = Signal(str)
 
     def __init__(self):
         QWidget.__init__(self)
@@ -19,6 +20,7 @@ class PictureGalaxy(QWidget):
         self.setMouseTracking(True)
         self.timer = QTimer(self)
         self.timer.timeout.connect(self.accept_play_trigger)
+        self.current_path = ""
 
     def accept_play_trigger(self):
         if self.index == self.datas.rowCount() - 1:
@@ -80,7 +82,6 @@ class PictureGalaxy(QWidget):
 
             self.index = min(self.index + 1, self.datas.rowCount() - 1)
             self.update()
-        self.setWindowTitle(self.datas.item(self.index).data(65535))
 
     def paintEvent(self, event: QPaintEvent) -> None:
         QWidget.paintEvent(self, event)
@@ -93,6 +94,10 @@ class PictureGalaxy(QWidget):
 
         curr_item: QStandardItem = self.datas.item(self.index, 0)
         path = curr_item.data(65535)
+
+        if path != self.current_path:
+            self.current_picture_changed.emit(path)
+
         if path not in self.pics_cache:
             self.pics_cache[path] = QPixmap(path)
 

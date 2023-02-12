@@ -1,4 +1,3 @@
-from PySide2.QtCore import QDir
 from PySide2.QtWidgets import QApplication, QSplitter, QMainWindow
 
 from PicsShow import PictureGalaxy
@@ -13,9 +12,14 @@ if __name__ == "__main__":
     win.setCentralWidget(split)
 
     show = PictureGalaxy()
-    w = PlayList(show)
-    split.addWidget(w)
+    list = PlayList(show)
+    split.addWidget(list)
     split.addWidget(show)
+
+    def show_title(title:str):
+        win.setWindowTitle(title)
+
+    show.current_picture_changed.connect(show_title)
 
     win.show()
     app.exec_()
