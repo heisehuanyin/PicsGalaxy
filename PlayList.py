@@ -4,7 +4,7 @@ from PySide2.QtWidgets import QWidget, QTreeView, QVBoxLayout, QApplication, QPu
     QSplitter, QListView, QMessageBox, QMenu, QAction
 from PySide2.QtGui import QStandardItemModel, QStandardItem, Qt
 
-from pics_show import PictureGalaxy
+from PicsShow import PictureGalaxy
 
 
 class PlayList(QWidget):

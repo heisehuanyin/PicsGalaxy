@@ -116,15 +116,10 @@ class PictureGalaxy(QWidget):
             painter.fillRect(self.area, QColor.fromRgb(255, 255, 255, 80))
         pass
 
-@Slot(str)
-def xprint(str):
-    print(str)
-
 if __name__ == "__main__":
     app = QApplication()
     w = PictureGalaxy()
     w.show()
     w.reset_picture_dir(QDir("""E:\\.CLOUDSYSTEM\\.HOMES\\18911586235\\来自：百度相册\\贴吧相册"""))
     w.auto_play(True, 5000)
-    w.pics_consume_out.connect(xprint)
     app.exec_()
