@@ -1,6 +1,6 @@
 from typing import List, Dict
 
-from PySide2.QtCore import QDir, QFileInfo, QRect, QTimer, Signal, Slot, QEvent
+from PySide2.QtCore import QDir, QFileInfo, QRect, QTimer, Signal, QEvent
 from PySide2.QtGui import QStandardItemModel, QPaintEvent, Qt, QStandardItem, QMouseEvent, QPixmap, QPainter, \
     QColor, QPen, QBrush
 from PySide2.QtWidgets import QApplication, QWidget
