@@ -7,6 +7,8 @@ from PySide2.QtWidgets import QApplication, QWidget
 
 
 class PictureGalaxy(QWidget):
+    pics_consume_out = Signal(str)
+
     def __init__(self):
         QWidget.__init__(self)
         self.img_types: List[str] = ["*.jpeg", "*.jpg", "*.png", "*.bmp"]
@@ -19,6 +21,10 @@ class PictureGalaxy(QWidget):
         self.timer.timeout.connect(self.accept_play_trigger)
 
     def accept_play_trigger(self):
+        if self.index == self.datas.rowCount() - 1:
+            curr_item: QStandardItem = self.datas.item(self.index, 0)
+            self.pics_consume_out.emit(curr_item.data(65535))
+
         self.index = min(self.index + 1, self.datas.rowCount() - 1)
         self.update()
         pass
@@ -67,6 +73,10 @@ class PictureGalaxy(QWidget):
             self.index = max(self.index - 1, 0)
             self.update()
         elif event.pos().x() > vcube.width() * 0.9:
+            if self.index == self.datas.rowCount() - 1:
+                curr_item: QStandardItem = self.datas.item(self.index, 0)
+                self.pics_consume_out.emit(curr_item.data(65535))
+
             self.index = min(self.index + 1, self.datas.rowCount() - 1)
             self.update()
         self.setWindowTitle(self.datas.item(self.index).data(65535))
@@ -105,10 +115,15 @@ class PictureGalaxy(QWidget):
             painter.fillRect(self.area, QColor.fromRgb(255, 255, 255, 80))
         pass
 
+@Slot(str)
+def xprint(str):
+    print(str)
+
 if __name__ == "__main__":
     app = QApplication()
     w = PictureGalaxy()
     w.show()
-    w.reset_picture_dir(QDir("""E:\\.HOMES\\18911586235\\来自：Colorfly E708 Q1\\wallpaper"""))
+    w.reset_picture_dir(QDir("""E:\\.CLOUDSYSTEM\\.HOMES\\18911586235\\来自：百度相册\\贴吧相册"""))
     w.auto_play(True, 5000)
+    w.pics_consume_out.connect(xprint)
     app.exec_()
