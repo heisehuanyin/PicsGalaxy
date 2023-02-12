@@ -51,7 +51,8 @@ class PictureGalaxy(QWidget):
             real_path = it.canonicalFilePath()
             auto_item.setData(real_path, 65535)
             self.datas.appendRow(auto_item)
-        pass
+
+        self.update()
 
     def mouseMoveEvent(self, event:QMouseEvent) -> None:
         vcube = self.size()
