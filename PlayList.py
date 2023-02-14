@@ -1,4 +1,7 @@
 #!/usr/bin/python3
+import os.path
+from pathlib import Path
+
 from PySide2.QtCore import QDir, Signal, Slot, QFileInfo, QModelIndex, QPoint, QFile, QIODevice, QTextStream
 from PySide2.QtWidgets import QWidget, QTreeView, QVBoxLayout, QApplication, QPushButton, QGridLayout, QFileDialog, \
     QSplitter, QListView, QMessageBox, QMenu, QAction
